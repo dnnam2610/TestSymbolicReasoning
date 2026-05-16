@@ -54,9 +54,9 @@ from utils import (
 def get_args():
     parser = argparse.ArgumentParser(description="Load model config and run something")
     
-    parser.add_argument('--file_path', type=str, required=True, help='Path to Reasoning Json File')
+    parser.add_argument('--file_path', type=str, default='output.json', help='Path to Reasoning Json File')
     parser.add_argument('--config', type=str, required=True, help='Path to YAML config file')
-    parser.add_argument('--device', type=int, required=True, default='cuda:0', help='Path to YAML config file')
+    parser.add_argument('--device', type=str, default='cuda', help='Path to YAML config file')
     
     return parser.parse_args()
 
