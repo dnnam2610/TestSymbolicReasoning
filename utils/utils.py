@@ -137,7 +137,7 @@ def load_llm(model_id, config, model_type="llama", device='cuda'):
         config['task'],
         model=model.cuda(device),
         tokenizer=tokenizer,
-        generation_config=generation_config,
+        # generation_config=generation_config,
         device=device
     )
 
