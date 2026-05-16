@@ -9,6 +9,6 @@ Levenshtein==0.27.3
 langchain_huggingface==1.2.2 
 nltk==3.9.4 
 peft==0.19.1
-torch==2.7.1
+# torch==2.7.1
 ply==3.11
 https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
