@@ -93,9 +93,10 @@ def load_finetune_model(model_base, peft_path, device):
     model = PeftModel.from_pretrained(
         model_base,
         peft_path,
-        torch_dtype=torch.float16
+        torch_dtype=torch.float16,
+        device_map="auto"
     )
-    model = model.cuda(device)    # <-- Và ép model về cuda:0 luôn
+    # model = model.cuda(device)    # <-- Và ép model về cuda:0 luôn
     return model
 
 
@@ -114,11 +115,17 @@ def load_llm(model_id, config, model_type="llama", device='cuda'):
         "pad_token": "<unk>",
     })
 
-    # Load model
+    # # Load model
+    # model = AutoModelForCausalLM.from_pretrained(
+    #     model_id,
+    #     torch_dtype=torch.float16,
+    #     token=token,
+    # ).to(device)
     model = AutoModelForCausalLM.from_pretrained(
         model_id,
         torch_dtype=torch.float16,
-        token=token
+        token=token,
+        device_map="auto"
     )
 
     # Load generation config
@@ -135,10 +142,11 @@ def load_llm(model_id, config, model_type="llama", device='cuda'):
     # Build pipeline
     text_pipeline = pipeline(
         config['task'],
-        model=model.cuda(device),
+        # model=model.cuda(device),
+        model=model,
         tokenizer=tokenizer,
         # generation_config=generation_config,
-        device=device
+        # device=device
     )
 
     llm = HuggingFacePipeline(pipeline=text_pipeline, model_kwargs={"temperature": config['temperature']})
