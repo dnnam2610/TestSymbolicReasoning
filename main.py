@@ -186,7 +186,7 @@ def remove_redundant_predicates(sample: dict, fact_indices: list[int]) -> list:
 
 # -------------------------------- FastAPI -> app.py ---------------------------------
 class LogicModel:
-    def __init__(self, config_path='/workspace/SymbolicResoning/XAI/config/config_model.yml', device='cuda:0'):
+    def __init__(self, config_path='/workspace/SymbolicResoning/XAI/config/config_model.yml', device='cuda'):
         self.device = device
         self._init_config(config_path)
         self._init_llama_models()
